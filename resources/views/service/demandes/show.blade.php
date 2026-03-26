@@ -183,9 +183,9 @@
                         <textarea name="description" rows="3" class="form-control @error('description') is-invalid @enderror"></textarea>
                     </div>
                     <div class="mb-2">
-                        <label class="form-label">Fichier cahier des charges (PDF)</label>
+                        <label class="form-label">Fichier cahier des charges</label>
                         <input type="file" name="fichier_path"
-                            class="form-control @error('fichier_path') is-invalid @enderror" accept=".pdf" required>
+                            class="form-control @error('fichier_path') is-invalid @enderror" required>
                         @error('fichier_path')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror

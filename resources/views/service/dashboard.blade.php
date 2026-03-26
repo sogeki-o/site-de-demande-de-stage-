@@ -204,8 +204,8 @@
                                                 placeholder="Sujet" required {{ $canPartagerCahier ? '' : 'disabled' }}>
                                             <textarea name="description" rows="2" class="form-control mb-2" placeholder="Description"
                                                 {{ $canPartagerCahier ? '' : 'disabled' }}></textarea>
-                                            <input type="file" name="fichier_path" class="form-control mb-2"
-                                                accept=".pdf" required {{ $canPartagerCahier ? '' : 'disabled' }}>
+                                            <input type="file" name="fichier_path" class="form-control mb-2" required
+                                                {{ $canPartagerCahier ? '' : 'disabled' }}>
                                             <button type="submit" class="btn btn-outline-success btn-sm"
                                                 {{ $canPartagerCahier ? '' : 'disabled' }}>Partager</button>
                                         </form>

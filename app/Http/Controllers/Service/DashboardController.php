@@ -320,7 +320,7 @@ class DashboardController extends Controller
         $validated = $request->validate([
             'sujet_stage' => 'required|string|max:255',
             'description' => 'nullable|string|max:3000',
-            'fichier_path' => 'required|file|mimes:pdf|max:10240',
+            'fichier_path' => 'required|file|max:10240',
         ]);
 
         $filePath = $request->file('fichier_path')->store('cahiers_charges', 'public');
