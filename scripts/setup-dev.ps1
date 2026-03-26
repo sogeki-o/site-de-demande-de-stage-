@@ -22,15 +22,20 @@ if ($envContent -match "APP_KEY=\s*$") {
     Write-Host "[4/7] APP_KEY existe deja, etape ignoree." -ForegroundColor Yellow
 }
 
-if (-not (Test-Path "database")) {
-    New-Item -ItemType Directory -Path "database" | Out-Null
+Write-Host "[5/7] Verification de la configuration MySQL..." -ForegroundColor Cyan
+$envContent = Get-Content ".env" -Raw
+
+if ($envContent -notmatch "(?m)^DB_CONNECTION=mysql\s*$") {
+    Write-Host "DB_CONNECTION doit etre defini a mysql dans .env." -ForegroundColor Red
+    exit 1
 }
 
-if (-not (Test-Path "database/database.mysql")) {
-    Write-Host "[5/7] Creation de database/database.mysql..." -ForegroundColor Cyan
-    New-Item -ItemType File -Path "database/database.mysql" | Out-Null
-} else {
-    Write-Host "[5/7] database/database.mysql existe deja, etape ignoree." -ForegroundColor Yellow
+$requiredVars = @("127.0.0.1", "3306", "gestion_stages_uca", "root")
+foreach ($varName in $requiredVars) {
+    if ($envContent -notmatch "(?m)^$varName=.+$") {
+        Write-Host "$varName est vide ou absent dans .env." -ForegroundColor Red
+        exit 1
+    }
 }
 
 Write-Host "[6/7] Migration et seeding de la base..." -ForegroundColor Cyan
