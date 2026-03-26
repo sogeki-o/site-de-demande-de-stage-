@@ -26,11 +26,11 @@ if (-not (Test-Path "database")) {
     New-Item -ItemType Directory -Path "database" | Out-Null
 }
 
-if (-not (Test-Path "database/database.sqlite")) {
-    Write-Host "[5/7] Creation de database/database.sqlite..." -ForegroundColor Cyan
-    New-Item -ItemType File -Path "database/database.sqlite" | Out-Null
+if (-not (Test-Path "database/database.mysql")) {
+    Write-Host "[5/7] Creation de database/database.mysql..." -ForegroundColor Cyan
+    New-Item -ItemType File -Path "database/database.mysql" | Out-Null
 } else {
-    Write-Host "[5/7] database/database.sqlite existe deja, etape ignoree." -ForegroundColor Yellow
+    Write-Host "[5/7] database/database.mysql existe deja, etape ignoree." -ForegroundColor Yellow
 }
 
 Write-Host "[6/7] Migration et seeding de la base..." -ForegroundColor Cyan
