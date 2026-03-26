@@ -12,7 +12,7 @@ Application web Laravel pour la gestion des demandes de stage entre trois profil
 - Composer
 - Node.js 20+ et npm
 - Laravel 12
-- SQLite (par defaut) ou MySQL
+- MySQL
 
 ## Installation rapide (Windows PowerShell)
 
@@ -27,7 +27,6 @@ Ce script:
 - installe les dependances PHP et JS
 - cree `.env` depuis `.env.example` si absent
 - genere `APP_KEY` si absent
-- cree le fichier `database/database.sqlite` si necessaire
 - execute les migrations et les seeders
 
 ## Installation manuelle
@@ -39,13 +38,6 @@ copy .env.example .env
 php artisan key:generate
 php artisan migrate --seed
 ```
-
-Pour Linux/macOS, remplacer `copy` par:
-
-```bash
-cp .env.example .env
-```
-
 ## Lancement en local
 
 Terminal 1:
