@@ -157,6 +157,7 @@ class DashboardController extends Controller
 
         $validated = $request->validate([
             'service_uca_id' => 'required|exists:services_uca,id',
+            'documents_demande' => 'nullable|string|max:2000',
         ]);
 
         $service = ServiceUCA::find($validated['service_uca_id']);
@@ -182,6 +183,7 @@ class DashboardController extends Controller
             'statut' => 'affectee_service',
             'service_uca_id' => $validated['service_uca_id'],
             'motif_refus' => null,
+            'documents_demande' => $validated['documents_demande'] ?? null,
             'date_traitement_rh' => now(),
             'date_affectation' => now(),
             'traite_par' => Auth::id(),

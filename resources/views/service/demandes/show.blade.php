@@ -141,14 +141,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <div class="col-12">
-                            <label class="form-label">Liste des documents a deposer</label>
-                            <textarea name="documents_demande" rows="2" class="form-control @error('documents_demande') is-invalid @enderror"
-                                placeholder="Ex: Copie CIN, releves de notes, lettre de motivation" {{ $canPlanifierEntretien ? '' : 'disabled' }}></textarea>
-                            @error('documents_demande')
-                                <div class="invalid-feedback">{{ $message }}</div>
-                            @enderror
-                        </div>
                     </div>
                     <button type="submit" class="btn btn-primary mt-3"
                         {{ $canPlanifierEntretien ? '' : 'disabled' }}>Planifier et envoyer la convocation</button>

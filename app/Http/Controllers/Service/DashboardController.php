@@ -237,7 +237,6 @@ class DashboardController extends Controller
             'date_heure' => 'required|date',
             'lieu' => 'nullable|string|max:255',
             'lien_reunion' => 'nullable|url|max:255',
-            'documents_demande' => 'nullable|string|max:2000',
         ]);
 
         $entretien = Entretien::updateOrCreate(
@@ -246,7 +245,7 @@ class DashboardController extends Controller
                 'date_heure' => $validated['date_heure'],
                 'lieu' => $validated['lieu'] ?? null,
                 'lien_reunion' => $validated['lien_reunion'] ?? null,
-                'documents_demande' => $validated['documents_demande'] ?? null,
+                'documents_demande' => $demandeStage->documents_demande,
                 'users_id' => Auth::id(),
                 'realise' => false,
             ]

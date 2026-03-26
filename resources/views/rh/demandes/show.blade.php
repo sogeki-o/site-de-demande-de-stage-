@@ -102,6 +102,14 @@
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            <div class="col-12">
+                                <label class="form-label">Liste des documents a deposer</label>
+                                <textarea name="documents_demande" rows="2" class="form-control @error('documents_demande') is-invalid @enderror"
+                                    placeholder="Ex: Copie CIN, releves de notes, lettre de motivation">{{ old('documents_demande', $demande->documents_demande) }}</textarea>
+                                @error('documents_demande')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
                             <div class="col-md-4">
                                 <button type="submit" class="btn btn-success w-100">Accepter et affecter</button>
                             </div>

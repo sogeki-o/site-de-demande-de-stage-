@@ -14,7 +14,7 @@ class DemandeStage extends Model
     protected $fillable = [
         'user_id', 'niveau_etude', 'etablissement', 'filiere', 'duree_stage',
         'date_debut_prevue', 'service_uca_id', 'cv_path', 'statut', 'motif_refus',
-        'date_soumission', 'date_traitement_rh', 'date_affectation', 'traite_par'
+        'documents_demande', 'date_soumission', 'date_traitement_rh', 'date_affectation', 'traite_par'
     ];
 
     protected $casts = [

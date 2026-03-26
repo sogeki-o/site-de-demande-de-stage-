@@ -177,8 +177,6 @@
                                                 placeholder="Lieu" {{ $canPlanifier ? '' : 'disabled' }}>
                                             <input type="url" name="lien_reunion" class="form-control mb-2"
                                                 placeholder="Lien de reunion" {{ $canPlanifier ? '' : 'disabled' }}>
-                                            <textarea name="documents_demande" rows="2" class="form-control mb-2" placeholder="Documents a deposer"
-                                                {{ $canPlanifier ? '' : 'disabled' }}></textarea>
                                             <button type="submit" class="btn btn-primary btn-sm"
                                                 {{ $canPlanifier ? '' : 'disabled' }}>Planifier + Envoyer
                                                 email</button>
