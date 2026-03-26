@@ -146,3 +146,45 @@
         </div>
     </div>
 @endsection
+
+@push('scripts')
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const recentUsers = @json($recentUsers);
+            const recentDemandes = @json($recentDemandes);
+
+            // Afficher les utilisateurs
+            const userSection = document.querySelector('.user-section');
+            userSection.innerHTML = '';
+            recentUsers.forEach(user => {
+                const userItem = document.createElement('div');
+                userItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+                userItem.innerHTML = `
+                    <div>
+                        <div class="fw-semibold">${user.prenom} ${user.nom}</div>
+                        <small class="text-muted">${user.email}</small>
+                    </div>
+                    <span class="badge bg-secondary text-uppercase">${user.role}</span>
+                `;
+                userSection.appendChild(userItem);
+            });
+
+            // Afficher les demandes
+            const demandeSection = document.querySelector('.demande-section');
+            demandeSection.innerHTML = '';
+            recentDemandes.forEach(demande => {
+                const demandeItem = document.createElement('div');
+                demandeItem.classList.add('list-group-item');
+                demandeItem.innerHTML = `
+                    <div class="d-flex justify-content-between">
+                        <div class="fw-semibold">${demande->user->prenom ?? ''} ${demande->user->nom ?? ''}</div>
+                        <small class="text-muted">${demande->created_at->diffForHumans()}</small>
+                    </div>
+                    <div class="small text-muted">${demande->service->nom ?? 'Service non défini'}</div>
+                    <div class="mt-1">@include('partials.statut-badge', ['statut' => $demande->statut])</div>
+                `;
+                demandeSection.appendChild(demandeItem);
+            });
+        });
+    </script>
+@endpush
