@@ -8,20 +8,10 @@ Application web Laravel pour la gestion des demandes de stage entre trois profil
 
 ## Stack technique
 
-- PHP 8.2+
+- PHP 9+
 - Composer
-- Node.js 20+ et npm
 - Laravel 12
 - MySQL
-
-## Installation rapide (Windows PowerShell)
-
-Depuis la racine du projet:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\setup-dev.ps1
-```
-
 Ce script:
 
 - installe les dependances PHP et JS
