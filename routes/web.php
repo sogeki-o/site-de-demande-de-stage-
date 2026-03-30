@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\UtilisateurController;
 use App\Http\Controllers\Admin\EmailTemplateController;
 use App\Http\Controllers\Admin\RequiredDocumentController;
 use App\Http\Controllers\Admin\AuditLogController;
+use App\Models\RequiredDocument;
 use App\Http\Controllers\Demandeur\DemandeController;
 use App\Http\Controllers\Demandeur\DashboardController;
 use App\Http\Controllers\RH\DashboardController as RHDashboardController;
@@ -78,6 +79,8 @@ Route::middleware('auth')->group(function () {
                     'demandes_soumises' => DemandeStage::where('statut', 'soumise')->count(),
                     'demandes_acceptees' => DemandeStage::whereIn('statut', ['acceptee_rh', 'affectee_service'])->count(),
                     'demandes_refusees' => DemandeStage::where('statut', 'refusee_rh')->count(),
+                    'documents_total' => RequiredDocument::count(),
+                    'documents_actifs' => RequiredDocument::where('is_active', true)->count(),
                 ];
 
                 $recentUsers = User::orderBy('created_at', 'desc')->limit(5)->get();
@@ -85,8 +88,12 @@ Route::middleware('auth')->group(function () {
                     ->orderBy('created_at', 'desc')
                     ->limit(5)
                     ->get();
+                $requiredDocuments = RequiredDocument::where('is_active', true)
+                    ->orderBy('sort_order')
+                    ->orderBy('name')
+                    ->get();
 
-                return view('admin.dashboard', compact('stats', 'recentUsers', 'recentDemandes'));
+                return view('admin.dashboard', compact('stats', 'recentUsers', 'recentDemandes', 'requiredDocuments'));
             })->name('dashboard');
 
             Route::resource('services', ServiceController::class)

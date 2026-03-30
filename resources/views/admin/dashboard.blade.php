@@ -10,7 +10,7 @@
         </div>
 
         <div class="row g-3 mb-4">
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md-2">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
                         <p class="text-muted mb-1">Utilisateurs</p>
@@ -18,7 +18,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md-2">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
                         <p class="text-muted mb-1">Services</p>
@@ -27,7 +27,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md-2">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
                         <p class="text-muted mb-1">Demandes</p>
@@ -35,13 +35,24 @@
                     </div>
                 </div>
             </div>
-            <div class="col-6 col-md-3">
+            <div class="col-6 col-md-2">
                 <div class="card border-0 shadow-sm h-100">
                     <div class="card-body">
                         <p class="text-muted mb-1">En attente</p>
                         <h3 class="mb-0 text-warning">{{ $stats['demandes_soumises'] }}</h3>
                     </div>
                 </div>
+            </div>
+            <div class="col-6 col-md-4">
+                <a href="{{ route('admin.required-documents.index') }}" class="text-decoration-none">
+                    <div class="card border-0 shadow-sm h-100 border-start border-primary border-3">
+                        <div class="card-body">
+                            <p class="text-muted mb-1">Documents à déposer</p>
+                            <h3 class="mb-0 text-primary">{{ $stats['documents_actifs'] }}</h3>
+                            <small class="text-muted">actifs / {{ $stats['documents_total'] }} configurés</small>
+                        </div>
+                    </div>
+                </a>
             </div>
         </div>
 
@@ -66,18 +77,52 @@
         <div class="row g-3">
             <div class="col-12">
                 <div class="card border-0 shadow-sm mb-3">
+                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Documents à déposer <span
+                                class="badge bg-primary ms-1">{{ $stats['documents_actifs'] }}</span></h5>
+                        <div class="d-flex gap-2">
+                            <a href="{{ route('admin.required-documents.create') }}" class="btn btn-sm btn-success">+
+                                Ajouter</a>
+                            <a href="{{ route('admin.required-documents.index') }}"
+                                class="btn btn-sm btn-outline-primary">Gérer</a>
+                        </div>
+                    </div>
+                    @if ($requiredDocuments->isEmpty())
+                        <div class="card-body text-muted">
+                            Aucun document requis configuré.
+                            <a href="{{ route('admin.required-documents.create') }}">Ajouter le premier document</a>.
+                        </div>
+                    @else
+                        <ul class="list-group list-group-flush">
+                            @foreach ($requiredDocuments as $doc)
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <span class="fw-semibold">{{ $doc->name }}</span>
+                                        @if ($doc->description)
+                                            <br><small class="text-muted">{{ $doc->description }}</small>
+                                        @endif
+                                    </div>
+                                    <a href="{{ route('admin.required-documents.edit', $doc) }}"
+                                        class="btn btn-sm btn-outline-secondary">Modifier</a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    @endif
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="card border-0 shadow-sm mb-3">
                     <div class="card-header bg-white">
-                        <h5 class="mb-0">Administration et referentiels</h5>
+                        <h5 class="mb-0">Liens rapides</h5>
                     </div>
                     <div class="card-body d-flex flex-wrap gap-2">
-                        <a href="{{ route('admin.services.index') }}" class="btn btn-outline-primary">Liste des
-                            services</a>
-                        <a href="{{ route('admin.utilisateurs.index') }}" class="btn btn-outline-primary">Utilisateurs et
-                            habilitations</a>
-                        <a href="{{ route('admin.required-documents.index') }}" class="btn btn-outline-primary">Documents a
-                            deposer</a>
-                        <a href="{{ route('admin.audit-logs.index') }}" class="btn btn-outline-dark">Journal des actions
-                            critiques</a>
+                        <a href="{{ route('admin.services.index') }}" class="btn btn-outline-primary">Services</a>
+                        <a href="{{ route('admin.utilisateurs.index') }}" class="btn btn-outline-primary">Utilisateurs</a>
+                        <a href="{{ route('admin.email-templates.index') }}" class="btn btn-outline-secondary">Templates
+                            email</a>
+                        <a href="{{ route('admin.audit-logs.index') }}" class="btn btn-outline-dark">Journal des
+                            actions</a>
                     </div>
                 </div>
             </div>
@@ -149,7 +194,7 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             const recentUsers = @json($recentUsers);
             const recentDemandes = @json($recentDemandes);
 
@@ -158,7 +203,8 @@
             userSection.innerHTML = '';
             recentUsers.forEach(user => {
                 const userItem = document.createElement('div');
-                userItem.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+                userItem.classList.add('list-group-item', 'd-flex', 'justify-content-between',
+                    'align-items-center');
                 userItem.innerHTML = `
                     <div>
                         <div class="fw-semibold">${user.prenom} ${user.nom}</div>
