@@ -52,7 +52,8 @@
                         <strong>CV:</strong>
                         <div>
                             @if ($demande->cv_path)
-                                <a href="{{ route('demandes.cv', $demande) }}" target="_blank" rel="noopener">Voir le
+                                <a href="{{ route('service.demandes.cv', $demande) }}" target="_blank" rel="noopener">Voir
+                                    le
                                     CV</a>
                             @else
                                 <span class="text-muted">Aucun CV joint</span>
@@ -197,7 +198,9 @@
                     <hr>
                     <p class="mb-1"><strong>Cahier actuel:</strong> {{ $demande->cahierCharge->sujet_stage }}</p>
                     <a href="{{ route('service.demandes.cahier', $demande) }}" target="_blank" rel="noopener">Voir le
-                        cahier des charges partage</a>
+                        cahier des charges partagé</a>
+                    <a href="{{ route('service.cahiers.index') }}" class="btn btn-primary ms-2">Gérer les cahiers de
+                        charge</a>
                 @endif
 
                 <hr>

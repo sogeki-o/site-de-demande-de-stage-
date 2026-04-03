@@ -143,6 +143,8 @@ Route::middleware('auth')->group(function () {
             ->name('service.demandes');
         Route::get('/service/demandes/{demandeStage}', [ServiceDashboardController::class, 'show'])
             ->name('service.demandes.show');
+        Route::get('/service/demandes/{demandeStage}/cv', [ServiceDashboardController::class, 'cv'])
+            ->name('service.demandes.cv');
         Route::post('/service/demandes/{demandeStage}/accepter', [ServiceDashboardController::class, 'accepter'])
             ->name('service.demandes.accepter');
         Route::post('/service/demandes/{demandeStage}/refuser', [ServiceDashboardController::class, 'refuser'])
@@ -159,6 +161,14 @@ Route::middleware('auth')->group(function () {
             ->name('service.demandes.cloturer');
         Route::get('/service/demandes/{demandeStage}/cahier', [ServiceDashboardController::class, 'downloadCahier'])
             ->name('service.demandes.cahier');
+        Route::get('/service/cahiers/{cahier}/download', [CahierChargeController::class, 'download'])
+            ->name('service.cahiers.download');
+
+        // Gestion des cahiers de charge (liste, détail, édition, suppression)
+        Route::resource('cahiers', CahierChargeController::class, [
+            'as' => 'service',
+            'parameters' => ['cahiers' => 'cahier']
+        ]);
     });
 
     // Demandeur

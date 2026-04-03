@@ -173,6 +173,17 @@ class DashboardController extends Controller
         ]);
     }
 
+    public function cv(DemandeStage $demandeStage)
+    {
+        $this->ensureServiceAccess($demandeStage);
+
+        if (! $demandeStage->cv_path || ! Storage::disk('public')->exists($demandeStage->cv_path)) {
+            abort(404);
+        }
+
+        return response()->file(storage_path('app/public/' . $demandeStage->cv_path));
+    }
+
     public function accepter(DemandeStage $demandeStage)
     {
         $this->ensureServiceAccess($demandeStage);

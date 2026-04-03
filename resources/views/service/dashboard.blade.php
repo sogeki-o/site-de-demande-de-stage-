@@ -4,10 +4,16 @@
 
 @section('content')
     <div class="container">
+
         <!-- En-tête -->
-        <div class="p-4 mb-4 bg-primary text-white rounded-3 shadow">
-            <h1 class="h3 mb-0"><i class="fas fa-tachometer-alt me-2"></i>Tableau de bord - Service</h1>
-            <p class="mb-0 opacity-75">Gestion des demandes de stage affectées à votre service</p>
+        <div class="p-4 mb-4 bg-primary text-white rounded-3 shadow d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="h3 mb-0"><i class="fas fa-tachometer-alt me-2"></i>Tableau de bord - Service</h1>
+                <p class="mb-0 opacity-75">Gestion des demandes de stage affectées à votre service</p>
+            </div>
+            <a href="{{ route('service.cahiers.index') }}" class="btn btn-outline-light btn-lg">
+                <i class="fas fa-folder-open me-1"></i> Gérer les cahiers de charge
+            </a>
         </div>
 
         <!-- Statistiques -->

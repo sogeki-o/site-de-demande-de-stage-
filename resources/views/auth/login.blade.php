@@ -61,9 +61,9 @@
             <div class="alert alert-warning mt-4 small">
                 <strong>Comptes de test :</strong>
                 <ul class="mb-0 mt-1">
-                    <li><strong>Admin :</strong> admin@uca.ma / admin123</li>
-                    <li><strong>RH :</strong> rh@uca.ma / rh123</li>
-                    <li><strong>Service :</strong> service.info@uca.ma / service123</li>
+                    <li><strong>Admin :</strong> admin@gmail.com / admin123</li>
+                    <li><strong>RH :</strong> rh@gmail.com / testrh123</li>
+                    <li><strong>Service informatique:</strong> service.info1@uca.ma / service123</li>
                 </ul>
             </div>
         </div>
